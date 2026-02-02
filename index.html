@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASK</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.257.0/dist/lucide.min.js"></script>
+  </head>
+  <body>
+    <div class="top">
+      <div class="top-header">
+        <h1>ASSAMESE PHONETICS KEYBOARD</h1>
+        <div class="controls">
+          <button class="control-btn" id="copyBtn">
+            <svg class="lucide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy
+          </button>
+
+          <button class="control-btn" id="exportTxtBtn">
+            <svg class="lucide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Export TXT
+          </button>
+
+          <button class="control-btn" id="exportDocsBtn">
+            <svg class="lucide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"></path>
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+              <line x1="8" y1="10" x2="16" y2="10"></line>
+              <line x1="8" y1="14" x2="16" y2="14"></line>
+            </svg>
+            Export Docs
+          </button>
+
+          <button class="control-btn" id="shareBtn">
+            <svg class="lucide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            Share
+          </button>
+
+          <button class="control-btn" id="fullscreenBtn">
+            <svg class="lucide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+              <path d="M16 3h3a2 2 0 0 1 2 2v3"></path>
+              <path d="M8 21H5a2 2 0 0 1-2-2v-3"></path>
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+            </svg>
+            Fullscreen
+          </button>
+
+          <button class="control-btn" id="toggleEnglishBtn">
+            <svg class="lucide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19h6"></path>
+              <path d="M7 5v14"></path>
+              <path d="M14 5h5"></path>
+              <path d="M14 12h4"></path>
+              <path d="M14 19h5"></path>
+            </svg>
+            ABC
+          </button>
+        </div>
+      </div>
+
+      <textarea id="textArea" placeholder="Type here..."></textarea>
+    </div>
+
+    <div class="bottom">
+      <div class="keyboard-row">
+        <div class="keyboard" id="numbers"></div>
+        <div class="keyboard" id="symbols"></div>
+        <div class="keyboard" id="vowels"></div>
+        <div class="keyboard" id="consonants-row1"></div>
+        <div class="keyboard" id="consonants-row2"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
