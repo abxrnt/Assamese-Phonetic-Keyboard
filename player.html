@@ -13,16 +13,39 @@
       overflow: hidden;
     }
 
-    .column {
-      width: 50%;
+    /* Left column: player + search + videos */
+    .left-column {
+      width: 30%;
       padding: 10px;
       box-sizing: border-box;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
       background: #f9f9f9;
+      overflow-y: auto;
     }
 
-    #videoList h2 {
-      margin-top: 0;
+    /* Right column (empty or future content) */
+    .right-column {
+      width: 70%;
+      background: #ffffff;
+    }
+
+    iframe {
+      width: 100%;
+      height: 180px; /* adjust height as needed */
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #searchBar {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 14px;
     }
 
     .video-item {
@@ -52,50 +75,51 @@
       flex: 1;
       font-size: 14px;
     }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
   </style>
 </head>
 <body>
-  <div class="column" id="videoList">
-    <h2>Videos</h2>
-  </div>
-  <div class="column">
+  <div class="left-column">
     <iframe id="player" src="" allowfullscreen></iframe>
+    <input type="text" id="searchBar" placeholder="Search videos..." />
+    <div id="videoList"></div>
   </div>
+  <div class="right-column"></div>
 
   <script>
     const apiKey = 'AIzaSyDRT9wHPO3y7tEIW-h9C67cJJboG0gZixE'; // Your API key
-    const query = 'Hindi music'; // Search term
     const maxResults = 10;
 
+    const searchBar = document.getElementById('searchBar');
     const videoListDiv = document.getElementById('videoList');
     const player = document.getElementById('player');
 
-    async function fetchVideos() {
+    async function fetchVideos(query) {
       try {
         const response = await fetch(
           `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(query)}&videoEmbeddable=true&videoSyndicated=true&safeSearch=none`
         );
         const data = await response.json();
+        videoListDiv.innerHTML = ''; // clear previous results
         if (data.items && data.items.length > 0) {
           displayVideos(data.items);
+          // autoplay first video
+          const firstVideo = data.items.find(v => v.id.videoId);
+          if (firstVideo) {
+            player.src = `https://www.youtube.com/embed/${firstVideo.id.videoId}?autoplay=1`;
+          }
         } else {
-          videoListDiv.innerHTML += "<p>No embeddable videos found.</p>";
+          videoListDiv.innerHTML = "<p>No embeddable videos found.</p>";
+          player.src = '';
         }
       } catch (error) {
         console.error("Error fetching videos:", error);
-        videoListDiv.innerHTML += "<p>Failed to fetch videos.</p>";
+        videoListDiv.innerHTML = "<p>Failed to fetch videos.</p>";
       }
     }
 
     function displayVideos(videos) {
       videos.forEach(video => {
-        if (!video.id.videoId) return; // Skip invalid videos
+        if (!video.id.videoId) return;
 
         const item = document.createElement('div');
         item.className = 'video-item';
@@ -118,7 +142,15 @@
       });
     }
 
-    fetchVideos();
+    // Initial fetch
+    fetchVideos('Hindi music');
+
+    // Search on enter key
+    searchBar.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        fetchVideos(searchBar.value);
+      }
+    });
   </script>
 </body>
 </html>
